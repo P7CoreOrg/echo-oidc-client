@@ -1,12 +1,13 @@
 package main
 
 import (
+	oidc "echo-oidc-client/pkg/p7coreorg/go-oidc"
+	"echo-oidc-client/pkg/pkce"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
-
-	oidc "echo-oidc-client/pkg/p7coreorg/go-oidc"
 
 	echo "github.com/labstack/echo/v4"
 	middleware "github.com/labstack/echo/v4/middleware"
@@ -47,7 +48,7 @@ func main() {
 		RedirectURL:  "http://127.0.0.1:1323/auth/google/callback",
 		Scopes:       []string{oidc.ScopeOpenID, "profile", "email"},
 	}
-	state := "foobar" // Don't do this in production.
+	PkceState := &pkce.AuthorizeState{}
 
 	e := echo.New()
 	e.Use(middleware.Logger())
@@ -60,15 +61,26 @@ func main() {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 	e.GET("/login", func(c echo.Context) error {
-		return c.Redirect(http.StatusFound, config.AuthCodeURL(state))
+		PkceState = pkce.CreateAuthorizePkceState()
+
+		url := config.AuthCodeURL(PkceState.State,
+			oauth2.SetAuthURLParam("nonce", PkceState.Nonce),
+			oauth2.SetAuthURLParam("code_challenge", PkceState.Pkce.CodeChallenge),
+			oauth2.SetAuthURLParam("code_challenge_method", pkce.Sha256),
+		)
+
+		fmt.Println(fmt.Sprintf("code_url:%s", url))
+		return c.Redirect(http.StatusFound, url)
 	})
 	e.GET("/auth/google/callback", func(c echo.Context) error {
 		r := c.Request()
 
-		if r.URL.Query().Get("state") != state {
+		if r.URL.Query().Get("state") != PkceState.State {
 			return c.String(http.StatusBadRequest, "state did not match!")
 		}
-		oauth2Token, err := config.Exchange(ctx, r.URL.Query().Get("code"))
+
+		oauth2Token, err := config.Exchange(ctx, r.URL.Query().Get("code"),
+			oauth2.SetAuthURLParam("code_verifier", PkceState.Pkce.CodeVerifier))
 		if err != nil {
 			return c.String(http.StatusInternalServerError, "Failed to exchange token: "+err.Error())
 		}
