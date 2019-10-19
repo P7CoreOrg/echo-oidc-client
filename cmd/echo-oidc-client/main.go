@@ -31,7 +31,12 @@ func init() {
 
 func main() {
 	ctx := context.Background()
-	provider, err := oidc.NewProvider(ctx, "https://accounts.google.com")
+	options := &oidc.ProviderOptions{
+		Authority: "https://accounts.google.com",
+		//		Authority:            "https://localhost:6001",
+		AuthorityIssuerMatch: false,
+	}
+	provider, err := oidc.NewProvider(ctx, options)
 	//provider, err := oidc.NewProvider(ctx, "https://localhost:6001")
 	if err != nil {
 		log.Fatal(err)
