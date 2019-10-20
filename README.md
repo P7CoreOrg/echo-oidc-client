@@ -8,8 +8,8 @@ This application is backed by the Echo framework. To get started with developmen
 go mod download
 ```
 
-Once all dependencies are installed, you can start the server easily.
+Once all dependencies are installed, you can run the CLI easily.
 
 ```bash
-go run cmd\cli-login\afx-cli.go
+go run .\afx
 ```
