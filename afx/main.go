@@ -37,14 +37,24 @@ func main() {
 		TempFolder = os.Getenv("TMPDIR")
 	}
 
-	dir := path.Join(TempFolder, "_afx_cli")
-	err, db := globals.OpenBadgerDb(dir)
+	if globals.UseBolt() {
+		boltDir := path.Join(TempFolder, "_afx_cli_boltDB")
+		err, boldDB := globals.OpenBoltDb(boltDir)
+		defer boldDB.Close()
+		if err != nil {
+			log.Fatalf("Could not open DB!: %s", err.Error())
+			panic("Could not open DB!")
+		}
+	} else {
+		dir := path.Join(TempFolder, "_afx_cli")
 
-	if err != nil {
-		log.Fatalf("Could not open DB!: %s", err.Error())
-		panic("Could not open DB!")
+		err, db := globals.OpenBadgerDb(dir)
+		if err != nil {
+			log.Fatalf("Could not open DB!: %s", err.Error())
+			panic("Could not open DB!")
+		}
+		defer db.Close()
 	}
-	defer db.Close()
 
 	cmd.Execute()
 }

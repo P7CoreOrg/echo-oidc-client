@@ -7,7 +7,7 @@ require (
 	github.com/P7CoreOrg/go-oidc v2.1.0+incompatible // indirect
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
-	github.com/boltdb/bolt v1.3.1 // indirect
+	github.com/boltdb/bolt v1.3.1
 	github.com/coreos/go-oidc v2.1.0+incompatible
 	github.com/dgraph-io/badger v1.6.0
 	github.com/golang/protobuf v1.3.2 // indirect

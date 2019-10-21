@@ -21,7 +21,7 @@
             "mode": "auto",
             "program": "${workspaceFolder}/afx/main.go",
             "env": {},
-            "args": ["config", "-s","-t","4"]
+            "args": ["login"]
         }
     ]
 }
