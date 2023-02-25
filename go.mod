@@ -4,25 +4,17 @@ go 1.13
 
 require (
 	github.com/AndreasBriese/bbloom v0.0.0-20190825152654-46b345b51c96 // indirect
-	github.com/P7CoreOrg/go-oidc v2.1.0+incompatible // indirect
-	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
-	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
 	github.com/boltdb/bolt v1.3.1
 	github.com/coreos/go-oidc v2.1.0+incompatible
 	github.com/dgraph-io/badger v1.6.0
 	github.com/golang/protobuf v1.3.2 // indirect
-	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/echo/v4 v4.1.11
 	github.com/magiconair/properties v1.8.1 // indirect
 	github.com/mattn/go-colorable v0.1.4 // indirect
 	github.com/mattn/go-isatty v0.0.10 // indirect
 	github.com/mitchellh/go-homedir v1.1.0
-	github.com/p7coreorg/go-oidc v2.1.0+incompatible
-	github.com/pborman/getopt v0.0.0-20190409184431-ee0cd42419d3 // indirect
 	github.com/pelletier/go-toml v1.5.0 // indirect
 	github.com/pquerna/cachecontrol v0.0.0-20180517163645-1555304b9b35
-	github.com/rapidloop/skv v0.0.0-20180909015525-9def2caac4cc
-	github.com/robfig/cron/v3 v3.0.0 // indirect
 	github.com/skratchdot/open-golang v0.0.0-20190402232053-79abb63cd66e
 	github.com/spf13/afero v1.2.2 // indirect
 	github.com/spf13/cobra v0.0.5
@@ -33,8 +25,7 @@ require (
 	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550 // indirect
 	golang.org/x/net v0.0.0-20191014212845-da9a3fd4c582
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	golang.org/x/sys v0.0.0-20191020152052-9984515f0562 // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
-	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/square/go-jose.v2 v2.3.1
 )
